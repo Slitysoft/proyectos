@@ -1,26 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vistas;
 
 import controladores.Operaciones;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
+
 public class jAltaContacto extends javax.swing.JFrame {
 
-    /**
-     * Creates new form JRegistro
-     */
-    public jAltaContacto() {
+    private String usuario;
+    
+    public jAltaContacto(String usuario) {
         initComponents();
+        this.usuario = usuario;
     }
 
     /**
@@ -220,8 +213,8 @@ public class jAltaContacto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       Operaciones registrar = new Operaciones();
-     
+        Operaciones registrar = new Operaciones();
+
         try {
             registrar.RegistrarNuevoContacto(
                     this.txtNombre.getText(),
@@ -233,14 +226,15 @@ public class jAltaContacto extends javax.swing.JFrame {
                     "tipoContacto",
                     "cumpleaños",
                     this.txtGustos.getText(),
-                    "usuarioQueRegistra", 
-                    rootPaneCheckingEnabled);
+                    usuario,
+                    false);
+            JOptionPane.showMessageDialog(null, registrar.getInformacion());
+
         } catch (SQLException ex) {
             Logger.getLogger(jAltaContacto.class.getName()).log(Level.SEVERE, null, ex);
         }
-               
-                    
-           
+
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtCumpleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCumpleActionPerformed
@@ -278,7 +272,6 @@ public class jAltaContacto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new jAltaContacto().setVisible(true);
             }
         });
     }

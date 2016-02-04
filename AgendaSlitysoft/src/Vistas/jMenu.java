@@ -1,16 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vistas;
 
-import javax.swing.JLabel;
 
-/**
- *
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
 public class jMenu extends javax.swing.JFrame {
 
 private String nombreCompletoUsuario;
@@ -142,7 +132,7 @@ private String usuario;
 @SuppressWarnings("empty-statement")
     private void btnAgregarContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarContactoActionPerformed
         
-        jAltaContacto agregarContacto = new jAltaContacto();
+        jAltaContacto agregarContacto = new jAltaContacto(this.getUsuario());
         agregarContacto.setVisible(true);
         
     }//GEN-LAST:event_btnAgregarContactoActionPerformed
