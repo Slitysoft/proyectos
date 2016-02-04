@@ -24,7 +24,7 @@ public class Operaciones extends Conexion {
         comprobarContrasenias comprobar = new comprobarContrasenias();
 
         if (comprobar.verificar(passUno, passDos)) {
-            this.conectar();
+           if( this.conectar()){
             this.insertar("usuario",
                     " usuario,"
                     + "nombre_Completo_Usuario, "
@@ -50,6 +50,7 @@ public class Operaciones extends Conexion {
 
             this.informacion = this.getMensaje();
             this.cerrarConexion();
+           }
         } else {
 
             this.informacion = "Contraseñas diferentes, intentalo de nuevo";
@@ -74,6 +75,9 @@ public class Operaciones extends Conexion {
                 exito = false;
             }
             this.cerrarConexion();
+        }else{
+        
+        this.informacion = "Error al intentar conectar a la BD revise la conexion";
         }
 
         return exito;
@@ -81,54 +85,47 @@ public class Operaciones extends Conexion {
     }
 
     public void RegistrarNuevoContacto(String nombre,
-        
             String telefono,
             String celular,
-            String otroTelefono,
             String correo,
-            String foto,
-            String tipoContacto,
             String cumple,
             String gustos,
             String usuario,
             String usuarioEliminado) throws SQLException {
 
+   
         
-            this.conectar();
-            
-            this.getMensaje();
-            
-            this.insertar("contacto",
-                    "nombre_Completo_Contacto, "
-                    + "telefono_Contacto,"
-                    + "celular_Contacto,"
-                    + "otro_Telefono_Contacto,"
-                    + "email_Contacto,"
-                    + "imagen_Contacto,"
-                    + "tipo_Contacto,"
-                    + "cumpleanios_Contacto,"
-                    + "gustos_Contacto,"
-                    + " usuario_usuario,"
-                    + "eliminado_contacto,", "?,?,?,?,?,?,?,?,?,?,?");
+       if( this.conectar()){
 
-            this.getActualizar().setString(1, nombre);
-            this.getActualizar().setString(2, telefono);
-            this.getActualizar().setString(3, celular);
-            this.getActualizar().setString(4, otroTelefono);
-            this.getActualizar().setString(5, correo);
-            this.getActualizar().setString(6, foto);
-            this.getActualizar().setString(7, tipoContacto);
-            this.getActualizar().setDate(8, new java.sql.Date(1992 - 1608));
-            this.getActualizar().setString(9, gustos);
-            this.getActualizar().setString(10, usuario);
-            this.getActualizar().setString(11, usuarioEliminado);
+        this.insertar("contacto",
+                "nombre_Completo_Contacto, "
+                + "telefono_Contacto,"
+                + "celular_Contacto,"
+                + "email_Contacto,"
+                + "cumpleanios_Contacto,"
+                + "gustos_Contacto,"
+                + " usuario_usuario,"
+                + "eliminado_contacto", "?,?,?,?,?,?,?,?");
+
+        this.getActualizar().setString(1, nombre);
+        this.getActualizar().setString(2, telefono);
+        this.getActualizar().setString(3, celular);
+        this.getActualizar().setString(4, correo);
+        this.getActualizar().setDate(5, new java.sql.Date(1992 - 1608));
+        this.getActualizar().setString(6, gustos);
+        this.getActualizar().setString(7, usuario);
+        this.getActualizar().setString(8, usuarioEliminado);
 
 //            
-            this.getActualizar().executeUpdate();
+       this.getActualizar().executeUpdate();
 
-            this.informacion = this.getMensaje();
-            this.cerrarConexion();
+        this.informacion = this.getMensaje();
+        this.cerrarConexion();
+       }else{
         
+        this.informacion = "Error al intentar conectar a la BD revise la conexion";
+        }
+
     }
 
     public String getInformacion() {

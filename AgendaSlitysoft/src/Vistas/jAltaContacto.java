@@ -7,11 +7,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 public class jAltaContacto extends javax.swing.JFrame {
 
     private String usuario;
-    
+
     public jAltaContacto(String usuario) {
         initComponents();
         this.usuario = usuario;
@@ -214,23 +213,20 @@ public class jAltaContacto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        
+
         Operaciones registrar = new Operaciones();
-                
+
         try {
             registrar.RegistrarNuevoContacto(
                     this.txtNombre.getText(),
                     this.txtTelefono.getText(),
                     this.txtCelular.getText(),
-                    "otroTelefono",
                     this.txtEmail.getText(),
-                    "foto",
-                    "tipoContacto",
                     "cumpleaños",
                     this.txtGustos.getText(),
-                    usuario,
+                    this.usuario,
                     "no");
-            
+
             JOptionPane.showMessageDialog(null, registrar.getInformacion());
 
         } catch (SQLException ex) {
