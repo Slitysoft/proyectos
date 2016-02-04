@@ -91,10 +91,13 @@ public class Operaciones extends Conexion {
             String cumple,
             String gustos,
             String usuario,
-            Boolean usuarioEliminado) throws SQLException {
+            String usuarioEliminado) throws SQLException {
 
         
             this.conectar();
+            
+            this.getMensaje();
+            
             this.insertar("contacto",
                     "nombre_Completo_Contacto, "
                     + "telefono_Contacto,"
@@ -105,7 +108,7 @@ public class Operaciones extends Conexion {
                     + "tipo_Contacto,"
                     + "cumpleanios_Contacto,"
                     + "gustos_Contacto,"
-                    + " usuario,"
+                    + " usuario_usuario,"
                     + "eliminado_contacto,", "?,?,?,?,?,?,?,?,?,?,?");
 
             this.getActualizar().setString(1, nombre);
@@ -118,7 +121,7 @@ public class Operaciones extends Conexion {
             this.getActualizar().setDate(8, new java.sql.Date(1992 - 1608));
             this.getActualizar().setString(9, gustos);
             this.getActualizar().setString(10, usuario);
-            this.getActualizar().setBoolean(11, usuarioEliminado);
+            this.getActualizar().setString(11, usuarioEliminado);
 
 //            
             this.getActualizar().executeUpdate();

@@ -1,5 +1,6 @@
 package Vistas;
 
+import BD.Conexion;
 import controladores.Operaciones;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -213,8 +214,9 @@ public class jAltaContacto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        
         Operaciones registrar = new Operaciones();
-
+                
         try {
             registrar.RegistrarNuevoContacto(
                     this.txtNombre.getText(),
@@ -227,7 +229,8 @@ public class jAltaContacto extends javax.swing.JFrame {
                     "cumpleaños",
                     this.txtGustos.getText(),
                     usuario,
-                    false);
+                    "no");
+            
             JOptionPane.showMessageDialog(null, registrar.getInformacion());
 
         } catch (SQLException ex) {
