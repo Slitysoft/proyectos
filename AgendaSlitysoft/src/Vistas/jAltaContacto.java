@@ -5,6 +5,11 @@
  */
 package Vistas;
 
+import controladores.Operaciones;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
@@ -43,13 +48,13 @@ public class jAltaContacto extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtGustos = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        txtCumple1 = new javax.swing.JTextField();
+        txtFoto = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,13 +78,24 @@ public class jAltaContacto extends javax.swing.JFrame {
 
         jLabel6.setText("Cumpleaños");
 
+        txtCumple.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCumpleActionPerformed(evt);
+            }
+        });
+
         jLabel8.setText("Gustos");
 
         txtGustos.setColumns(20);
         txtGustos.setRows(5);
         jScrollPane1.setViewportView(txtGustos);
 
-        jButton1.setText("Guardar");
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Actualizar");
 
@@ -105,7 +121,7 @@ public class jAltaContacto extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
+                            .addComponent(btnGuardar)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -116,7 +132,7 @@ public class jAltaContacto extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addComponent(jButton5))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtCumple1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtCumple, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,11 +184,11 @@ public class jAltaContacto extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCumple1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnGuardar)
                     .addComponent(jButton3)
                     .addComponent(jButton5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -202,6 +218,34 @@ public class jAltaContacto extends javax.swing.JFrame {
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+       Operaciones registrar = new Operaciones();
+     
+        try {
+            registrar.RegistrarNuevoContacto(
+                    this.txtNombre.getText(),
+                    this.txtTelefono.getText(),
+                    this.txtCelular.getText(),
+                    "otroTelefono",
+                    this.txtEmail.getText(),
+                    "foto",
+                    "tipoContacto",
+                    "cumpleaños",
+                    this.txtGustos.getText(),
+                    "usuarioQueRegistra", 
+                    rootPaneCheckingEnabled);
+        } catch (SQLException ex) {
+            Logger.getLogger(jAltaContacto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+               
+                    
+           
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void txtCumpleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCumpleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCumpleActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,7 +285,7 @@ public class jAltaContacto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox boxTipo;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -258,8 +302,8 @@ public class jAltaContacto extends javax.swing.JFrame {
     private javax.swing.JLabel tel;
     private javax.swing.JTextField txtCelular;
     private javax.swing.JTextField txtCumple;
-    private javax.swing.JTextField txtCumple1;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtFoto;
     private javax.swing.JTextArea txtGustos;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;

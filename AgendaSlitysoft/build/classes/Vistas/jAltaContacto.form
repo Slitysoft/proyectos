@@ -53,7 +53,7 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel6" alignment="0" min="-2" pref="59" max="-2" attributes="0"/>
                               <Component id="jLabel8" alignment="0" min="-2" pref="59" max="-2" attributes="0"/>
                           </Group>
@@ -67,7 +67,7 @@
                               <Component id="jButton5" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtCumple1" alignment="0" min="-2" pref="155" max="-2" attributes="0"/>
+                          <Component id="txtFoto" alignment="0" min="-2" pref="155" max="-2" attributes="0"/>
                           <Component id="txtCumple" alignment="0" min="-2" pref="155" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -135,12 +135,12 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtCumple1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtFoto" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="88" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -209,6 +209,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCumple">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCumpleActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
@@ -230,10 +233,13 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="btnGuardar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Guardar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton2">
           <Properties>
@@ -260,7 +266,7 @@
             <Property name="text" type="java.lang.String" value="Foto"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtCumple1">
+        <Component class="javax.swing.JTextField" name="txtFoto">
         </Component>
       </SubComponents>
     </Container>
