@@ -1,24 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controladores;
 
 import BD.Conexion;
 import java.sql.SQLException;
-import jdk.nashorn.internal.codegen.CompilerConstants;
 
-/**
- *
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
 public class Operaciones extends Conexion {
 
     private String informacion = "";
     private String nombreCompleto;
     private String usuario;
-    
+
     public void RegistrarUsuario(String nombre,
             String telefono,
             String celular,
@@ -44,8 +34,7 @@ public class Operaciones extends Conexion {
                     + "cumpleanios_usuario,"
                     + "gustos_usuario,"
                     + "password_usuario,"
-                    + "folio_secreto"
-                    , "?,?,?,?,?,?,?,?,?");
+                    + "folio_secreto", "?,?,?,?,?,?,?,?,?");
 
             this.getActualizar().setString(1, usuario);
             this.getActualizar().setString(2, nombre);
@@ -56,12 +45,11 @@ public class Operaciones extends Conexion {
             this.getActualizar().setString(7, Gustos);
             this.getActualizar().setString(8, passUno);
             this.getActualizar().setString(9, folio);
-          
 
             this.getActualizar().executeUpdate();
-          
+
             this.informacion = this.getMensaje();
-              this.cerrarConexion();
+            this.cerrarConexion();
         } else {
 
             this.informacion = "Contraseñas diferentes, intentalo de nuevo";
@@ -92,6 +80,54 @@ public class Operaciones extends Conexion {
 
     }
 
+    public void RegistrarNuevoContacto(String nombre,
+        
+            String telefono,
+            String celular,
+            String otroTelefono,
+            String correo,
+            String foto,
+            String tipoContacto,
+            String cumple,
+            String gustos,
+            String usuario,
+            Boolean usuarioEliminado) throws SQLException {
+
+        
+            this.conectar();
+            this.insertar("contacto",
+                    "nombre_Completo_Contacto, "
+                    + "telefono_Contacto,"
+                    + "celular_Contacto,"
+                    + "otro_Telefono_Contacto,"
+                    + "email_Contacto,"
+                    + "imagen_Contacto,"
+                    + "tipo_Contacto,"
+                    + "cumpleanios_Contacto,"
+                    + "gustos_Contacto,"
+                    + " usuario,"
+                    + "eliminado_contacto,", "?,?,?,?,?,?,?,?,?,?,?");
+
+            this.getActualizar().setString(1, nombre);
+            this.getActualizar().setString(2, telefono);
+            this.getActualizar().setString(3, celular);
+            this.getActualizar().setString(4, otroTelefono);
+            this.getActualizar().setString(5, correo);
+            this.getActualizar().setString(6, foto);
+            this.getActualizar().setString(7, tipoContacto);
+            this.getActualizar().setDate(8, new java.sql.Date(1992 - 1608));
+            this.getActualizar().setString(9, gustos);
+            this.getActualizar().setString(10, usuario);
+            this.getActualizar().setBoolean(11, usuarioEliminado);
+
+//            
+            this.getActualizar().executeUpdate();
+
+            this.informacion = this.getMensaje();
+            this.cerrarConexion();
+        
+    }
+
     public String getInformacion() {
         return informacion;
     }
@@ -116,5 +152,4 @@ public class Operaciones extends Conexion {
         this.usuario = usuario;
     }
 
-    
 }
