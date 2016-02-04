@@ -16,7 +16,9 @@ import jdk.nashorn.internal.codegen.CompilerConstants;
 public class Operaciones extends Conexion {
 
     private String informacion = "";
-
+    private String nombreCompleto;
+    private String usuario;
+    
     public void RegistrarUsuario(String nombre,
             String telefono,
             String celular,
@@ -42,8 +44,8 @@ public class Operaciones extends Conexion {
                     + "cumpleanios_usuario,"
                     + "gustos_usuario,"
                     + "password_usuario,"
-                    + "folio_secreto "
-                    + "foto_usuario", "?,?,?,?,?,?,?,?,?,?");
+                    + "folio_secreto"
+                    , "?,?,?,?,?,?,?,?,?");
 
             this.getActualizar().setString(1, usuario);
             this.getActualizar().setString(2, nombre);
@@ -54,11 +56,12 @@ public class Operaciones extends Conexion {
             this.getActualizar().setString(7, Gustos);
             this.getActualizar().setString(8, passUno);
             this.getActualizar().setString(9, folio);
-            this.getActualizar().setString(10, foto);
+          
 
             this.getActualizar().executeUpdate();
-            this.cerrarConexion();
+          
             this.informacion = this.getMensaje();
+              this.cerrarConexion();
         } else {
 
             this.informacion = "Contraseñas diferentes, intentalo de nuevo";
@@ -73,10 +76,14 @@ public class Operaciones extends Conexion {
         if (this.conectar()) {
             this.obtenerDatos("select * from usuario where usuario = \"" + user + "\" and password_Usuario = \"" + pass + "\"");
             if (this.getDatos().next()) {
-                this.informacion = "Bienvenido " + this.getDatos().getString("nombre_completo_usuario");
+                this.informacion = this.getDatos().getString("nombre_completo_usuario");
+                this.nombreCompleto = this.informacion;
+                this.usuario = this.getDatos().getString("usuario");
+                exito = true;
             } else {
 
                 this.informacion = "Usuario o contraseña Incorrectos";
+                exito = false;
             }
             this.cerrarConexion();
         }
@@ -93,4 +100,21 @@ public class Operaciones extends Conexion {
         this.informacion = informacion;
     }
 
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
+
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    
 }

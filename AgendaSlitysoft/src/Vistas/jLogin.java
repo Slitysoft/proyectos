@@ -121,34 +121,34 @@ public class jLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-       
+
         Operaciones verificar = new Operaciones();
         try {
-            if(verificar.ValidarUsuario(this.txtUsuario.getText(),this.txtPassword.getText())){
-            
-                JOptionPane.showMessageDialog(null, verificar.getInformacion());
-                jMenu menu = new jMenu();
-               menu.setVisible(true);
-              
+            if (verificar.ValidarUsuario(this.txtUsuario.getText(), this.txtPassword.getText())) {
+
+                this.setVisible(false);
+                JOptionPane.showMessageDialog(null, "Bienvenido " + verificar.getInformacion());
+                jMenu menu = new jMenu(verificar.getNombreCompleto(),verificar.getUsuario());
+               
+                menu.setVisible(true);
                 
-                        
-            }else
-                JOptionPane.showMessageDialog(null, verificar.getInformacion());
                 
+                
+                
+            } else {
+                JOptionPane.showMessageDialog(null, verificar.getInformacion());
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(jLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-               
-        
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         jRegistro registrar = new jRegistro();
-       registrar.setVisible(true);
+        registrar.setVisible(true);
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**
