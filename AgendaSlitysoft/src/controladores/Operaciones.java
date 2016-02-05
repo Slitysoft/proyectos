@@ -24,33 +24,33 @@ public class Operaciones extends Conexion {
         comprobarContrasenias comprobar = new comprobarContrasenias();
 
         if (comprobar.verificar(passUno, passDos)) {
-           if( this.conectar()){
-            this.insertar("usuario",
-                    " usuario,"
-                    + "nombre_Completo_Usuario, "
-                    + "email_usuario,"
-                    + "telefono_usuario,"
-                    + "celular_usuario,"
-                    + "cumpleanios_usuario,"
-                    + "gustos_usuario,"
-                    + "password_usuario,"
-                    + "folio_secreto", "?,?,?,?,?,?,?,?,?");
+            if (this.conectar()) {
+                this.insertar("usuario",
+                        " usuario,"
+                        + "nombre_Completo_Usuario, "
+                        + "email_usuario,"
+                        + "telefono_usuario,"
+                        + "celular_usuario,"
+                        + "cumpleanios_usuario,"
+                        + "gustos_usuario,"
+                        + "password_usuario,"
+                        + "folio_secreto", "?,?,?,?,?,?,?,?,?");
 
-            this.getActualizar().setString(1, usuario);
-            this.getActualizar().setString(2, nombre);
-            this.getActualizar().setString(3, correo);
-            this.getActualizar().setString(4, telefono);
-            this.getActualizar().setString(5, celular);
-            this.getActualizar().setDate(6, new java.sql.Date(1992 - 1608));
-            this.getActualizar().setString(7, Gustos);
-            this.getActualizar().setString(8, passUno);
-            this.getActualizar().setString(9, folio);
+                this.getActualizar().setString(1, usuario);
+                this.getActualizar().setString(2, nombre);
+                this.getActualizar().setString(3, correo);
+                this.getActualizar().setString(4, telefono);
+                this.getActualizar().setString(5, celular);
+                this.getActualizar().setDate(6, new java.sql.Date(1992 - 1608));
+                this.getActualizar().setString(7, Gustos);
+                this.getActualizar().setString(8, passUno);
+                this.getActualizar().setString(9, folio);
 
-            this.getActualizar().executeUpdate();
+                this.getActualizar().executeUpdate();
 
-            this.informacion = this.getMensaje();
-            this.cerrarConexion();
-           }
+                this.informacion = this.getMensaje();
+                this.cerrarConexion();
+            }
         } else {
 
             this.informacion = "Contraseñas diferentes, intentalo de nuevo";
@@ -75,9 +75,9 @@ public class Operaciones extends Conexion {
                 exito = false;
             }
             this.cerrarConexion();
-        }else{
-        
-        this.informacion = "Error al intentar conectar a la BD revise la conexion";
+        } else {
+
+            this.informacion = "Error al intentar conectar a la BD revise la conexion";
         }
 
         return exito;
@@ -93,37 +93,35 @@ public class Operaciones extends Conexion {
             String usuario,
             String usuarioEliminado) throws SQLException {
 
-   
-        
-       if( this.conectar()){
+        if (this.conectar()) {
 
-        this.insertar("contacto",
-                "nombre_Completo_Contacto, "
-                + "telefono_Contacto,"
-                + "celular_Contacto,"
-                + "email_Contacto,"
-                + "cumpleanios_Contacto,"
-                + "gustos_Contacto,"
-                + " usuario_usuario,"
-                + "eliminado_contacto", "?,?,?,?,?,?,?,?");
+            this.insertar("contacto",
+                    "nombre_Completo_Contacto, "
+                    + "telefono_Contacto,"
+                    + "celular_Contacto,"
+                    + "email_Contacto,"
+                    + "cumpleanios_Contacto,"
+                    + "gustos_Contacto,"
+                    + " usuario_usuario,"
+                    + "eliminado_contacto", "?,?,?,?,?,?,?,?");
 
-        this.getActualizar().setString(1, nombre);
-        this.getActualizar().setString(2, telefono);
-        this.getActualizar().setString(3, celular);
-        this.getActualizar().setString(4, correo);
-        this.getActualizar().setDate(5, new java.sql.Date(1992 - 1608));
-        this.getActualizar().setString(6, gustos);
-        this.getActualizar().setString(7, usuario);
-        this.getActualizar().setString(8, usuarioEliminado);
+            this.getActualizar().setString(1, nombre);
+            this.getActualizar().setString(2, telefono);
+            this.getActualizar().setString(3, celular);
+            this.getActualizar().setString(4, correo);
+            this.getActualizar().setDate(5, new java.sql.Date(1992 - 1608));
+            this.getActualizar().setString(6, gustos);
+            this.getActualizar().setString(7, usuario);
+            this.getActualizar().setString(8, usuarioEliminado);
 
 //            
-       this.getActualizar().executeUpdate();
+            this.getActualizar().executeUpdate();
 
-        this.informacion = this.getMensaje();
-        this.cerrarConexion();
-       }else{
-        
-        this.informacion = "Error al intentar conectar a la BD revise la conexion";
+            this.informacion = this.getMensaje();
+            this.cerrarConexion();
+        } else {
+
+            this.informacion = "Error al intentar conectar a la BD revise la conexion";
         }
 
     }

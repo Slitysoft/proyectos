@@ -7,7 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 public class jLogin extends javax.swing.JFrame {
 
     /**
@@ -15,6 +14,7 @@ public class jLogin extends javax.swing.JFrame {
      */
     public jLogin() {
         initComponents();
+        this.txtUsuario.requestFocus();
     }
 
     /**
@@ -61,6 +61,11 @@ public class jLogin extends javax.swing.JFrame {
         jLabel2.setText("Password");
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,15 +125,15 @@ public class jLogin extends javax.swing.JFrame {
 
                 this.setVisible(false);
                 JOptionPane.showMessageDialog(null, "Bienvenido " + verificar.getInformacion());
-                jMenu menu = new jMenu(verificar.getNombreCompleto(),verificar.getUsuario());
-               
+                jMenu menu = new jMenu(verificar.getNombreCompleto(), verificar.getUsuario());
+
                 menu.setVisible(true);
-                
-                
-                
-                
+
             } else {
                 JOptionPane.showMessageDialog(null, verificar.getInformacion());
+                this.txtUsuario.setText("");
+                this.txtPassword.setText("");
+                this.txtUsuario.requestFocus();
             }
 
         } catch (SQLException ex) {
@@ -142,6 +147,10 @@ public class jLogin extends javax.swing.JFrame {
         jRegistro registrar = new jRegistro();
         registrar.setVisible(true);
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments

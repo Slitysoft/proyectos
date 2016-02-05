@@ -8,12 +8,14 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class jAltaContacto extends javax.swing.JFrame {
-
+    
     private String usuario;
-
-    public jAltaContacto(String usuario) {
+    private String nombreCompletoUsuario;
+    
+    public jAltaContacto(String usuario, String nombreUsuario) {
         initComponents();
         this.usuario = usuario;
+        this.nombreCompletoUsuario = nombreUsuario;
     }
 
     /**
@@ -43,9 +45,9 @@ public class jAltaContacto extends javax.swing.JFrame {
         txtGustos = new javax.swing.JTextArea();
         btnGuardar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         txtFoto = new javax.swing.JTextField();
 
@@ -92,11 +94,21 @@ public class jAltaContacto extends javax.swing.JFrame {
 
         jButton2.setText("Actualizar");
 
-        jButton3.setText("Limpiar");
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Eliminar");
 
-        jButton5.setText("Cancelar");
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Foto");
 
@@ -121,9 +133,9 @@ public class jAltaContacto extends javax.swing.JFrame {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jButton3)
+                            .addComponent(btnLimpiar)
                             .addGap(18, 18, 18)
-                            .addComponent(jButton5))
+                            .addComponent(btnCancelar))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtCumple, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -182,8 +194,8 @@ public class jAltaContacto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
-                    .addComponent(jButton3)
-                    .addComponent(jButton5))
+                    .addComponent(btnLimpiar)
+                    .addComponent(btnCancelar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -213,9 +225,9 @@ public class jAltaContacto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-
+        
         Operaciones registrar = new Operaciones();
-
+        
         try {
             registrar.RegistrarNuevoContacto(
                     this.txtNombre.getText(),
@@ -226,19 +238,44 @@ public class jAltaContacto extends javax.swing.JFrame {
                     this.txtGustos.getText(),
                     this.usuario,
                     "no");
-
+            
+            this.txtNombre.setText("");
+            this.txtTelefono.setText("");
+            this.txtCelular.setText("");
+            this.txtEmail.setText("");
+            this.txtCumple.setText("");
+            this.txtGustos.setText("");
+            this.txtFoto.setText("");
+            
             JOptionPane.showMessageDialog(null, registrar.getInformacion());
-
+            
         } catch (SQLException ex) {
             Logger.getLogger(jAltaContacto.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtCumpleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCumpleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCumpleActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        this.txtNombre.setText("");
+        this.txtTelefono.setText("");
+        this.txtCelular.setText("");
+        this.txtEmail.setText("");
+        this.txtCumple.setText("");
+        this.txtGustos.setText("");
+        this.txtFoto.setText("");
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        
+        jMenu volver = new jMenu(nombreCompletoUsuario, usuario);
+        volver.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,11 +314,11 @@ public class jAltaContacto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox boxTipo;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

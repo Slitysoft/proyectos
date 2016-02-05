@@ -132,7 +132,7 @@ private String usuario;
 @SuppressWarnings("empty-statement")
     private void btnAgregarContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarContactoActionPerformed
         
-        jAltaContacto agregarContacto = new jAltaContacto(this.getUsuario());
+        jAltaContacto agregarContacto = new jAltaContacto(this.getUsuario(), this.getNombreCompletoUsuario());
         agregarContacto.setVisible(true);
         
     }//GEN-LAST:event_btnAgregarContactoActionPerformed

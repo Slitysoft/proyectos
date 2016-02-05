@@ -11,15 +11,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
 public class jRegistro extends javax.swing.JFrame {
 
-   
     public jRegistro() {
         initComponents();
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -282,32 +279,30 @@ public class jRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-     
-        
-        
+
+
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnSeleccionImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionImagenActionPerformed
-      
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Formatos de Archivos JPEG(*.JPG;*.JPEG;)", "jpg","jpeg");
-        JFileChooser archivo  = new JFileChooser();
+
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Formatos de Archivos JPEG(*.JPG;*.JPEG;)", "jpg", "jpeg");
+        JFileChooser archivo = new JFileChooser();
         archivo.addChoosableFileFilter(filtro);
         archivo.setDialogTitle("Abrir archivo");
-      
+
         int ventana = archivo.showOpenDialog(null);
-        
-        if (ventana == JFileChooser.APPROVE_OPTION ) {
-            
+
+        if (ventana == JFileChooser.APPROVE_OPTION) {
+
             File file = archivo.getSelectedFile();
             txtImagen.setText(String.valueOf(file));
             Image foto = getToolkit().getImage(txtImagen.getText());
             foto = foto.getScaledInstance(130, 130, Image.SCALE_DEFAULT);
             labelFoto.setIcon(new ImageIcon(foto));
         }
-        
+
     }//GEN-LAST:event_btnSeleccionImagenActionPerformed
 
-   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -335,7 +330,7 @@ public class jRegistro extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               
+
             }
         });
     }
