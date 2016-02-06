@@ -1,7 +1,7 @@
 package Vistas;
 
+import controladores.Cifrado;
 import controladores.Operaciones;
-import controladores.comprobarContrasenias;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -120,12 +120,16 @@ public class jLogin extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
 
         Operaciones verificar = new Operaciones();
+        Cifrado cifrar = new Cifrado();
+        int movimiento = 3;
         try {
-            if (verificar.ValidarUsuario(this.txtUsuario.getText(), this.txtPassword.getText())) {
+            if (verificar.ValidarUsuario(cifrar.Cifrar(this.txtUsuario.getText(), movimiento), 
+                                         cifrar.Cifrar(this.txtPassword.getText(), movimiento))) {
 
                 this.setVisible(false);
-                JOptionPane.showMessageDialog(null, "Bienvenido " + verificar.getInformacion());
-                jMenu menu = new jMenu(verificar.getNombreCompleto(), verificar.getUsuario());
+                JOptionPane.showMessageDialog(null, "Bienvenido " + cifrar.Descifrar(verificar.getInformacion(), movimiento));
+                jMenu menu = new jMenu(cifrar.Descifrar(verificar.getNombreCompleto(), movimiento),
+                                       cifrar.Descifrar(verificar.getUsuario(), movimiento));
 
                 menu.setVisible(true);
 

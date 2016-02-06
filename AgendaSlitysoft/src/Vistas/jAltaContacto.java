@@ -1,6 +1,6 @@
 package Vistas;
 
-import BD.Conexion;
+import controladores.Cifrado;
 import controladores.Operaciones;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -44,9 +44,9 @@ public class jAltaContacto extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtGustos = new javax.swing.JTextArea();
         btnGuardar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         txtFoto = new javax.swing.JTextField();
@@ -92,7 +92,12 @@ public class jAltaContacto extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Actualizar");
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +106,12 @@ public class jAltaContacto extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Eliminar");
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -118,9 +128,9 @@ public class jAltaContacto extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(96, 96, 96)
-                .addComponent(jButton4)
+                .addComponent(btnEliminar)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2))
+                .addComponent(btnActualizar))
             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -198,8 +208,8 @@ public class jAltaContacto extends javax.swing.JFrame {
                     .addComponent(btnCancelar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4))
+                    .addComponent(btnActualizar)
+                    .addComponent(btnEliminar))
                 .addGap(6, 6, 6))
         );
 
@@ -227,17 +237,20 @@ public class jAltaContacto extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         
         Operaciones registrar = new Operaciones();
+        Cifrado cifrar = new Cifrado();
         
-        try {
-            registrar.RegistrarNuevoContacto(
-                    this.txtNombre.getText(),
-                    this.txtTelefono.getText(),
-                    this.txtCelular.getText(),
-                    this.txtEmail.getText(),
-                    "cumpleaños",
-                    this.txtGustos.getText(),
-                    this.usuario,
-                    "no");
+        int movimiento= 3;
+        
+        try {            
+                    registrar.RegistrarNuevoContacto(
+                    cifrar.Cifrar(this.txtNombre.getText(), movimiento),
+                    cifrar.Cifrar(this.txtTelefono.getText(), movimiento),
+                    cifrar.Cifrar(this.txtCelular.getText(), movimiento),
+                    cifrar.Cifrar(this.txtEmail.getText(), movimiento),
+                    cifrar.Cifrar("cumpleaños", movimiento),
+                    cifrar.Cifrar(this.txtGustos.getText(), movimiento),
+                    usuario,
+                    cifrar.Cifrar("no", movimiento));
             
             this.txtNombre.setText("");
             this.txtTelefono.setText("");
@@ -277,6 +290,28 @@ public class jAltaContacto extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        
+        String action = evt.getActionCommand();
+        if (action.equals("visible")) {
+            this.btnEliminar.setVisible(true);
+        }
+        else if (action.equals("noVisible")) {
+            this.btnEliminar.setVisible(false);
+        }
+    
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+
+        String action = evt.getActionCommand();
+        if (action.equals("visible")) {
+            this.btnActualizar.setVisible(true);
+        }
+        else if (action.equals("noVisible")) {
+            this.btnActualizar.setVisible(false);
+        }    }//GEN-LAST:event_btnActualizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -314,11 +349,11 @@ public class jAltaContacto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox boxTipo;
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

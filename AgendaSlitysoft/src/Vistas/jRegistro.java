@@ -1,5 +1,6 @@
 package Vistas;
 
+import controladores.Cifrado;
 import controladores.Operaciones;
 import java.awt.Image;
 import java.io.File;
@@ -257,18 +258,33 @@ public class jRegistro extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
         Operaciones registrar = new Operaciones();
+        Cifrado cifrar = new Cifrado();
+       
+        int movimiento=3;
+       
         try {
-            registrar.RegistrarUsuario(this.txtNombre.getText(),
-                    this.txtTelefono.getText(),
-                    this.txtCelular.getText(),
-                    this.txtEmail.getText(),
-                    this.txtCumple.getText(),
-                    this.txtGustos.getText(),
-                    this.txtUsuario.getText(),
-                    this.txtPasswordUno.getText(),
-                    this.txtPasswordDos.getText(),
-                    "Folio",
-                    "foto");
+            registrar.RegistrarUsuario(
+                    cifrar.Cifrar(this.txtNombre.getText(), movimiento),
+                    cifrar.Cifrar(this.txtTelefono.getText(), movimiento),
+                    cifrar.Cifrar(this.txtCelular.getText(), movimiento),
+                    cifrar.Cifrar(this.txtEmail.getText(), movimiento),
+                    cifrar.Cifrar(this.txtCumple.getText(), movimiento),
+                    cifrar.Cifrar(this.txtGustos.getText(), movimiento),
+                    cifrar.Cifrar(this.txtUsuario.getText(), movimiento),
+                    cifrar.Cifrar(this.txtPasswordUno.getText(), movimiento),
+                    cifrar.Cifrar(this.txtPasswordUno.getText(), movimiento),
+                    cifrar.Cifrar("Folio", movimiento),
+                    cifrar.Cifrar("foto", movimiento));
+            
+                    this.txtNombre.setText("");
+                    this.txtTelefono.setText("");
+                    this.txtCelular.setText("");
+                    this.txtEmail.setText("");
+                    this.txtCumple.setText("");
+                    this.txtGustos.setText("");
+                    this.txtUsuario.setText("");
+                    this.txtPasswordUno.setText("");
+                    this.txtPasswordDos.setText("");
 
             JOptionPane.showMessageDialog(null, registrar.getInformacion());
         } catch (SQLException ex) {
