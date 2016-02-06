@@ -1,7 +1,12 @@
 package controladores;
 
 import BD.Conexion;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import com.toedter.calendar.JCalendar;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
+import java.util.Date;
 
 public class Operaciones extends Conexion {
 
@@ -13,14 +18,17 @@ public class Operaciones extends Conexion {
             String telefono,
             String celular,
             String correo,
-            String cumple,
+            Date cumple,
             String Gustos,
             String usuario,
             String passUno,
             String passDos,
             String folio,
-            String foto) throws SQLException {
+            String foto) throws SQLException, FileNotFoundException {
 
+        FileInputStream archivoFoto;
+        archivoFoto = new FileInputStream(foto);
+        
         comprobarContrasenias comprobar = new comprobarContrasenias();
 
         if (comprobar.verificar(passUno, passDos)) {
@@ -34,17 +42,21 @@ public class Operaciones extends Conexion {
                         + "cumpleanios_usuario,"
                         + "gustos_usuario,"
                         + "password_usuario,"
-                        + "folio_secreto", "?,?,?,?,?,?,?,?,?");
+                        + "folio_secreto,"
+                       + "imagen_usuario"
+                       ,"?,?,?,?,?,?,?,?,?,?");
 
                 this.getActualizar().setString(1, usuario);
                 this.getActualizar().setString(2, nombre);
                 this.getActualizar().setString(3, correo);
                 this.getActualizar().setString(4, telefono);
                 this.getActualizar().setString(5, celular);
-                this.getActualizar().setDate(6, new java.sql.Date(1992 - 1608));
+                this.getActualizar().setDate(6, new java.sql.Date(cumple.getTime()));
                 this.getActualizar().setString(7, Gustos);
                 this.getActualizar().setString(8, passUno);
                 this.getActualizar().setString(9, folio);
+                this.getActualizar().setBinaryStream(10, archivoFoto);//Enviamos foto
+        
 
                 this.getActualizar().executeUpdate();
 
@@ -88,7 +100,7 @@ public class Operaciones extends Conexion {
             String telefono,
             String celular,
             String correo,
-            String cumple,
+            Date cumple,
             String gustos,
             String usuario,
             String usuarioEliminado
@@ -111,7 +123,7 @@ public class Operaciones extends Conexion {
             this.getActualizar().setString(2, telefono);
             this.getActualizar().setString(3, celular);
             this.getActualizar().setString(4, correo);
-            this.getActualizar().setDate(5, new java.sql.Date(1992 - 1608));
+            this.getActualizar().setDate(5, new java.sql.Date(cumple.getTime()));
             this.getActualizar().setString(6, gustos);
             this.getActualizar().setString(7, usuario);
             this.getActualizar().setString(8, usuarioEliminado);
