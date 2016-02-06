@@ -234,7 +234,7 @@ public class jAltaContacto extends javax.swing.JFrame {
         Operaciones registrar = new Operaciones();
         Cifrado cifrar = new Cifrado();
         
-        int movimiento= 3;
+        int movimiento = 3;
         
         try {            
                     registrar.RegistrarNuevoContacto(
@@ -244,7 +244,7 @@ public class jAltaContacto extends javax.swing.JFrame {
                     cifrar.Cifrar(this.txtEmail.getText(), movimiento),
                     cifrar.Cifrar("cumpleaños", movimiento),
                     cifrar.Cifrar(this.txtGustos.getText(), movimiento),
-                    usuario,
+                    cifrar.Cifrar(usuario, movimiento),
                     cifrar.Cifrar("no", movimiento));
             
             this.txtNombre.setText("");

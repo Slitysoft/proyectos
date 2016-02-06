@@ -1,10 +1,17 @@
 package controladores;
 
+// CIFRADO CESAR 
+
 public class Cifrado {
 
     char[] mensaje;
 
     private String cifrado;
+    
+    public void Cifrado(){
+        cifrado = "";
+
+}
 
     public String Cifrar(String mensaje, int movimiento) {
 
