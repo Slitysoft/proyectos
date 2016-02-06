@@ -91,7 +91,8 @@ public class Operaciones extends Conexion {
             String cumple,
             String gustos,
             String usuario,
-            String usuarioEliminado) throws SQLException {
+            String usuarioEliminado
+            ) throws SQLException {
 
         if (this.conectar()) {
 
@@ -103,7 +104,8 @@ public class Operaciones extends Conexion {
                     + "cumpleanios_Contacto,"
                     + "gustos_Contacto,"
                     + " usuario_usuario,"
-                    + "eliminado_contacto", "?,?,?,?,?,?,?,?");
+                    + "eliminado_contacto"
+                      , "?,?,?,?,?,?,?,?");
 
             this.getActualizar().setString(1, nombre);
             this.getActualizar().setString(2, telefono);
