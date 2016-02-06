@@ -1,26 +1,49 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vistas;
 
+import java.awt.Rectangle;
 
-import controladores.comprobarContrasenias;
-import javax.swing.JPanel;
+import javax.swing.JLabel;
+
 import javax.swing.JTextField;
 
-/**
- *
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
 public class contactos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form contactos
-     */
+    private int maxContactos = 2;
+
+    JTextField[] txtContacto;
+    JLabel[] labelContacto;
+
+//    JTextField[] jnombre;
+//    JTextField[] jtelefono;
+//    JTextField[] jcelular;
+//    JTextField[] jemail;
+//    JTextField[] jtipo;
+//
+//    JLabel[] lnombre;
+//    JLabel[] ltelefono;
+//    JLabel[] lcelular;
+//    JLabel[] lemail;
+//    JLabel[] ltipo;
     public contactos() {
+
+        txtContacto = new JTextField[5];
+        labelContacto = new JLabel[5];
+
+//        jnombre = new JTextField[maxContactos];
+//        jtelefono = new JTextField[maxContactos];
+//        jcelular = new JTextField[maxContactos];
+//        jemail = new JTextField[maxContactos];
+//        jtipo = new JTextField[maxContactos];
+//
+//        lnombre = new JLabel[maxContactos];
+//        ltelefono = new JLabel[maxContactos];
+//        lcelular = new JLabel[maxContactos];
+//        lemail = new JLabel[maxContactos];
+//        ltipo = new JLabel[maxContactos];
+        // JScrollPane pane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         initComponents();
+        //  this.setContentPane(pane);
+
     }
 
     /**
@@ -32,7 +55,13 @@ public class contactos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        see = new javax.swing.JScrollPane();
+        p = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,21 +72,52 @@ public class contactos extends javax.swing.JFrame {
             }
         });
 
+        see.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        p.setMaximumSize(getPreferredSize());
+
+        jLabel2.setText("jLabel2");
+
+        javax.swing.GroupLayout pLayout = new javax.swing.GroupLayout(p);
+        p.setLayout(pLayout);
+        pLayout.setHorizontalGroup(
+            pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pLayout.createSequentialGroup()
+                .addContainerGap(467, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(28, 28, 28))
+        );
+        pLayout.setVerticalGroup(
+            pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pLayout.createSequentialGroup()
+                .addContainerGap(Short.MAX_VALUE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(23, 23, 23))
+        );
+
+        see.setViewportView(p);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(see, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(215, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(see, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -65,10 +125,91 @@ public class contactos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-     
-        comprobarContrasenias no = new comprobarContrasenias();
         
- no.crear();
+        for (int j = 0; j < maxContactos*2; j++) {
+            
+       int k = 0;
+       int numero = 0;
+        for (int i = 0; i < 5; i++) {
+            txtContacto[i] = new JTextField();
+            labelContacto[i] = new JLabel();
+
+        
+
+//            for (int j = 0; j < 5; j++) {
+//                txtContacto[i].setText("Nombre " + i);
+//            }
+            
+            if(i == 5){
+                k = numero + 15;
+            txtContacto[i].setBounds(new Rectangle(25, numero, 60, 25));
+            }else{
+                
+                numero = ((i) + 1) * 15;
+            txtContacto[i].setBounds(new Rectangle(25,numero , 60, 25));
+            }
+            txtContacto[i].setText("Nombre " + i);
+            
+
+            p.add(txtContacto[i]);
+         
+
+        }
+        }
+
+     //   p.setBackground(Color.RED);
+//        int j = 0, k=0;
+//        for (int i = 0; i < jnombre.length; i++) {
+//           
+//            j += 2;
+//            k +=4;
+//            jnombre[i] = new JTextField();
+//            lnombre[i] = new JLabel();
+//            
+//            jtelefono[i] = new JTextField();
+//            ltelefono[i] = new JLabel();
+//            
+//            jcelular[i] = new JTextField();
+//            lcelular[i] = new JLabel();
+//            
+//        
+//            int resultadoz = (k + 1) * 30;
+//            
+//            int resultadox = (i + 1) * 10;
+//            int resultadoy = (j+ 1) * 20;
+//            
+//
+//            lnombre[i].setBounds(new Rectangle(25, resultadox, 60, 25));
+//            jnombre[i].setBounds(new Rectangle(100, resultadox, 60, 25));
+//
+//            ltelefono[i].setBounds(new Rectangle(25, resultadoy, 60, 25));
+//            jtelefono[i].setBounds(new Rectangle(100, resultadoy, 60, 25));
+//            
+//              lcelular[i].setBounds(new Rectangle(25, resultadoz, 60, 25));
+//            jcelular[i].setBounds(new Rectangle(100, resultadoz, 60, 25));
+//            
+//            
+//            jtelefono[i].setText("Telefono " + i);
+//            ltelefono[i].setText("Telefono " + i);
+//            
+//            jnombre[i].setText("Nombre " + i);
+//            lnombre[i].setText("Nombre " + i);
+//            
+//             jcelular[i].setText("Celular " + i);
+//            lcelular[i].setText("celular " + i);
+//
+//
+//            p.add(jnombre[i]);
+//            p.add(lnombre[i]);
+//
+//            p.add(jtelefono[i]);
+//            p.add(ltelefono[i]);
+//            
+//              p.add(jcelular[i]);
+//            p.add(lcelular[i]);
+//
+//        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -108,5 +249,9 @@ public class contactos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel p;
+    private javax.swing.JScrollPane see;
     // End of variables declaration//GEN-END:variables
 }
