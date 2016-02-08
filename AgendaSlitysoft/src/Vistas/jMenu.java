@@ -150,7 +150,7 @@ private String usuario;
 
     private void btnAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendaActionPerformed
         
-        jContactos mostrarContactos = new jContactos();
+        jContactos mostrarContactos = new jContactos(nombreCompletoUsuario,usuario);
         mostrarContactos.setVisible(true);
     }//GEN-LAST:event_btnAgendaActionPerformed
 

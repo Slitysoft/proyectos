@@ -1,12 +1,21 @@
 package controladores;
 
 import BD.Conexion;
+import CargarImagenes.Imagen;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import com.toedter.calendar.JCalendar;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Date;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class Operaciones extends Conexion {
 
@@ -24,49 +33,80 @@ public class Operaciones extends Conexion {
             String passUno,
             String passDos,
             String folio,
-            String foto) throws SQLException, FileNotFoundException {
+            String foto) throws SQLException, FileNotFoundException, IOException {
 
-        FileInputStream archivoFoto;
-        archivoFoto = new FileInputStream(foto);
-        
         comprobarContrasenias comprobar = new comprobarContrasenias();
 
         if (comprobar.verificar(passUno, passDos)) {
+
             if (this.conectar()) {
-                this.insertar("usuario",
-                        " usuario,"
-                        + "nombre_Completo_Usuario, "
-                        + "email_usuario,"
-                        + "telefono_usuario,"
-                        + "celular_usuario,"
-                        + "cumpleanios_usuario,"
-                        + "gustos_usuario,"
-                        + "password_usuario,"
-                        + "folio_secreto,"
-                       + "imagen_usuario"
-                       ,"?,?,?,?,?,?,?,?,?,?");
 
-                this.getActualizar().setString(1, usuario);
-                this.getActualizar().setString(2, nombre);
-                this.getActualizar().setString(3, correo);
-                this.getActualizar().setString(4, telefono);
-                this.getActualizar().setString(5, celular);
-                this.getActualizar().setDate(6, new java.sql.Date(cumple.getTime()));
-                this.getActualizar().setString(7, Gustos);
-                this.getActualizar().setString(8, passUno);
-                this.getActualizar().setString(9, folio);
-                this.getActualizar().setBinaryStream(10, archivoFoto);//Enviamos foto
-        
+                if (foto.equals("")) { //el usuario no ingreso fotografia
 
-                this.getActualizar().executeUpdate();
+                    this.insertar("usuario",
+                            " usuario,"
+                            + "nombre_Completo_Usuario, "
+                            + "email_usuario,"
+                            + "telefono_usuario,"
+                            + "celular_usuario,"
+                            + "cumpleanios_usuario,"
+                            + "gustos_usuario,"
+                            + "password_usuario,"
+                            + "folio_secreto", "?,?,?,?,?,?,?,?,?");
 
-                this.informacion = this.getMensaje();
+                    this.getActualizar().setString(1, usuario);
+                    this.getActualizar().setString(2, nombre);
+                    this.getActualizar().setString(3, correo);
+                    this.getActualizar().setString(4, telefono);
+                    this.getActualizar().setString(5, celular);
+                    this.getActualizar().setDate(6, new java.sql.Date(cumple.getTime()));
+                    this.getActualizar().setString(7, Gustos);
+                    this.getActualizar().setString(8, passUno);
+                    this.getActualizar().setString(9, folio);
+                    // this.getActualizar().setBinaryStream(10, archivoFoto);//Enviamos foto
+
+                    this.getActualizar().executeUpdate();
+
+                } else if (!foto.equals("")) {//el usuario ingreso fotografia
+
+                    this.insertar("usuario",
+                            " usuario,"
+                            + "nombre_Completo_Usuario, "
+                            + "email_usuario,"
+                            + "telefono_usuario,"
+                            + "celular_usuario,"
+                            + "cumpleanios_usuario,"
+                            + "gustos_usuario,"
+                            + "password_usuario,"
+                            + "folio_secreto,"
+                            + "imagen_usuario", "?,?,?,?,?,?,?,?,?,?");
+                    FileInputStream archivoFoto;
+                    archivoFoto = new FileInputStream(foto);
+                    this.getActualizar().setString(1, usuario);
+                    this.getActualizar().setString(2, nombre);
+                    this.getActualizar().setString(3, correo);
+                    this.getActualizar().setString(4, telefono);
+                    this.getActualizar().setString(5, celular);
+                    this.getActualizar().setDate(6, new java.sql.Date(cumple.getTime()));
+                    this.getActualizar().setString(7, Gustos);
+                    this.getActualizar().setString(8, passUno);
+                    this.getActualizar().setString(9, folio);
+                    this.getActualizar().setBinaryStream(10, archivoFoto);//Enviamos foto
+
+                    this.getActualizar().executeUpdate();
+
+                }
+
                 this.cerrarConexion();
+            } else {
+                this.informacion = "Error al intentar conectar";
             }
-        } else {
 
+        } else {
             this.informacion = "Contraseñas diferentes, intentalo de nuevo";
         }
+
+        this.informacion = this.getMensaje();
 
     }
 
@@ -104,7 +144,7 @@ public class Operaciones extends Conexion {
             String gustos,
             String usuario,
             String usuarioEliminado
-            ) throws SQLException {
+    ) throws SQLException {
 
         if (this.conectar()) {
 
@@ -116,8 +156,7 @@ public class Operaciones extends Conexion {
                     + "cumpleanios_Contacto,"
                     + "gustos_Contacto,"
                     + " usuario_usuario,"
-                    + "eliminado_contacto"
-                      , "?,?,?,?,?,?,?,?");
+                    + "eliminado_contacto", "?,?,?,?,?,?,?,?");
 
             this.getActualizar().setString(1, nombre);
             this.getActualizar().setString(2, telefono);
@@ -130,9 +169,10 @@ public class Operaciones extends Conexion {
 
 //            
             this.getActualizar().executeUpdate();
-
-            this.informacion = this.getMensaje();
             this.cerrarConexion();
+            this.informacion = this.getMensaje();
+            this.informacion = "Registro exitoso";
+
         } else {
 
             this.informacion = "Error al intentar conectar a la BD revise la conexion";

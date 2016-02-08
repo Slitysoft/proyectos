@@ -5,6 +5,7 @@ import controladores.Operaciones;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.logging.Level;
@@ -15,13 +16,14 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class jRegistro extends javax.swing.JFrame {
-
+    
     DateFormat formatoFecha = DateFormat.getDateInstance();
     
     public jRegistro() {
         initComponents();
+        txtImagen.setText("");
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -287,18 +289,15 @@ public class jRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-
+        
         Operaciones registrar = new Operaciones();
         Cifrado cifrar = new Cifrado();
-       
-        int movimiento=3;
-       
+        
+        int movimiento = 3;
+
        // String fechaObtenida = formatoFecha.format(calendario.getDate());
         //System.out.println(fechaObtenida);
-        
         try {
-            
-      
             
             registrar.RegistrarUsuario(
                     cifrar.Cifrar(this.txtNombre.getText(), movimiento),
@@ -312,25 +311,26 @@ public class jRegistro extends javax.swing.JFrame {
                     cifrar.Cifrar(this.txtPasswordUno.getText(), movimiento),
                     cifrar.Cifrar("Folio", movimiento),
                     this.txtImagen.getText());
-              
-
+            
             JOptionPane.showMessageDialog(null, registrar.getInformacion());
         } catch (SQLException ex) {
             Logger.getLogger(jRegistro.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(jRegistro.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(jRegistro.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-
+        
 
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnSeleccionImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionImagenActionPerformed
-
+        
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("Formatos de Archivos JPEG(*.JPG;*.JPEG;)", "jpg", "jpeg");
         JFileChooser archivo = new JFileChooser();
         archivo.addChoosableFileFilter(filtro);
@@ -338,9 +338,9 @@ public class jRegistro extends javax.swing.JFrame {
         File ruta = new File("C:");
         archivo.setCurrentDirectory(ruta);
         int ventana = archivo.showOpenDialog(null);
-
+        
         if (ventana == JFileChooser.APPROVE_OPTION) {
-
+            
             File file = archivo.getSelectedFile();
             txtImagen.setText(String.valueOf(file));
             Image foto = getToolkit().getImage(txtImagen.getText());
@@ -349,7 +349,7 @@ public class jRegistro extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnSeleccionImagenActionPerformed
-
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -377,7 +377,7 @@ public class jRegistro extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
+                
             }
         });
     }
